@@ -12,6 +12,7 @@ MAINTAINER AXA MedLA
 
 ENV http_proxy http://${proxyHost}:${proxyPort}
 ENV https_proxy http://${proxyHost}:${proxyHost}
+ENV LIFERAY_HOME /opt/liferay 
 
 RUN cd /opt \
 && curl -LO -x ${http_proxy} https://github.com/kelseyhightower/confd/releases/download/v0.11.0/confd-0.11.0-linux-amd64 \
@@ -41,7 +42,6 @@ RUN cd /tmp \
 && rm -f /tmp/liferay-portal-tomcat-6.2-ee-sp14-20151105114451508.zip \
 && ln -s /opt/liferay-portal-6.2-ee-sp14 /opt/liferay
 
-ENV LIFERAY_HOME /opt/liferay 
 RUN mkdir /opt/liferay/deploy/ \
 && cd /opt/liferay/deploy/ \
 && curl --digest -x ${http_proxy} --user ${REPO_USER}:${REPO_PASS} -LO http://filerepo.osappext.pink.eu-central-1.aws.openpaas.axa-cloud.com/liferay-docker/license-portaldevelopment-developer-6.2ee-axa.xml
