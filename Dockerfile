@@ -17,16 +17,9 @@ RUN cd /opt \
 && curl -LO -x ${http_proxy} https://github.com/kelseyhightower/confd/releases/download/v0.11.0/confd-0.11.0-linux-amd64 \
 && chmod 777 /opt/confd-0.11.0-linux-amd64 \
 && mv confd-0.11.0-linux-amd64 confd \
-&& mkdir -p /etc/confd/{conf.d,templates}
-
-#ADD portal-bundle.properties.tmpl /etc/confd/templates
-RUN cd /opt \
+&& mkdir -p /etc/confd/{conf.d,templates} \
 && curl --digest -x ${http_proxy} --user ${REPO_USER}:${REPO_PASS} -LO http://filerepo.osappext.pink.eu-central-1.aws.openpaas.axa-cloud.com/liferay-docker/portal-bundle.properties.tmpl \
-&& mv portal-bundle.properties.tmpl /etc/confd/templates/
-
-
-#ADD portal-bundle.properties.toml /etc/confd/conf.d
-RUN cd /opt \
+&& mv portal-bundle.properties.tmpl /etc/confd/templates/ \
 && curl --digest -x ${http_proxy} --user ${REPO_USER}:${REPO_PASS} -LO http://filerepo.osappext.pink.eu-central-1.aws.openpaas.axa-cloud.com/liferay-docker/portal-bundle.properties.toml \
 && mv portal-bundle.properties.toml /etc/confd/conf.d/
 
@@ -37,19 +30,16 @@ RUN yum -y update \
 
 #ADD jdk-7u79-linux-x64.rpm .
 RUN cd /tmp \
-&& curl --digest -x ${http_proxy} --user ${REPO_USER}:${REPO_PASS} -LO http://filerepo.osappext.pink.eu-central-1.aws.openpaas.axa-cloud.com/liferay-docker/jdk-7u79-linux-x64.rpm 
-
-RUN rpm -i /tmp/jdk-7u79-linux-x64.rpm \
+&& curl --digest -x ${http_proxy} --user ${REPO_USER}:${REPO_PASS} -LO http://filerepo.osappext.pink.eu-central-1.aws.openpaas.axa-cloud.com/liferay-docker/jdk-7u79-linux-x64.rpm \
+&& rpm -i /tmp/jdk-7u79-linux-x64.rpm \
 && rm -f /tmp/jdk-7u79-linux-x64.rpm
 
 #ADD liferay-portal-tomcat-6.2-ee-sp14-20151105114451508.zip /tmp
 RUN cd /tmp \
-&& curl --digest -x ${http_proxy} --user ${REPO_USER}:${REPO_PASS} -LO http://filerepo.osappext.pink.eu-central-1.aws.openpaas.axa-cloud.com/liferay-docker/liferay-portal-tomcat-6.2-ee-sp14-20151105114451508.zip
-
-RUN unzip /tmp/liferay-portal-tomcat-6.2-ee-sp14-20151105114451508.zip -d /opt \
-&& rm -f /tmp/liferay-portal-tomcat-6.2-ee-sp14-20151105114451508.zip
-
-RUN ln -s /opt/liferay-portal-6.2-ee-sp14 /opt/liferay
+&& curl --digest -x ${http_proxy} --user ${REPO_USER}:${REPO_PASS} -LO http://filerepo.osappext.pink.eu-central-1.aws.openpaas.axa-cloud.com/liferay-docker/liferay-portal-tomcat-6.2-ee-sp14-20151105114451508.zip \
+&& unzip /tmp/liferay-portal-tomcat-6.2-ee-sp14-20151105114451508.zip -d /opt \
+&& rm -f /tmp/liferay-portal-tomcat-6.2-ee-sp14-20151105114451508.zip \
+&& ln -s /opt/liferay-portal-6.2-ee-sp14 /opt/liferay
 
 ENV LIFERAY_HOME /opt/liferay 
 RUN mkdir /opt/liferay/deploy/ \
