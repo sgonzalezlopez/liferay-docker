@@ -36,11 +36,11 @@ RUN yum -y update \
 && yum clean all
 
 #ADD jdk-7u79-linux-x64.rpm .
-RUN cd / \
+RUN cd /tmp \
 && curl --digest -x ${http_proxy} --user ${REPO_USER}:${REPO_PASS} -LO http://filerepo.osappext.pink.eu-central-1.aws.openpaas.axa-cloud.com/liferay-docker/jdk-7u79-linux-x64.rpm 
 
-RUN rpm -i jdk-7u79-linux-x64.rpm \
-&& rm -f jdk-7u79-linux-x64.rpm
+RUN rpm -i /tmp/jdk-7u79-linux-x64.rpm \
+&& rm -f /tmp/jdk-7u79-linux-x64.rpm
 
 #ADD liferay-portal-tomcat-6.2-ee-sp14-20151105114451508.zip /tmp
 RUN cd /tmp \
