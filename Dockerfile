@@ -51,8 +51,11 @@ RUN unzip /tmp/liferay-portal-tomcat-6.2-ee-sp14-20151105114451508.zip -d /opt \
 
 RUN ln -s /opt/liferay-portal-6.2-ee-sp14 /opt/liferay
 
-ENV LIFERAY_HOME /opt/liferay
-RUN mkdir /opt/liferay/deploy/
+ENV LIFERAY_HOME /opt/liferay 
+RUN mkdir /opt/liferay/deploy/ \
+&& cd /opt/liferay/deploy/ \
+&& curl --digest -x ${http_proxy} --user ${REPO_USER}:${REPO_PASS} -LO http://filerepo.osappext.pink.eu-central-1.aws.openpaas.axa-cloud.com/liferay-docker/license-portaldevelopment-developer-6.2ee-axa.xml \
+
 RUN groupadd 1000 \
     && useradd -g 1000 -d $LIFERAY_HOME -s /bin/bash -c "Docker image user" 1000 \
     && chown -R 1000:1000 /opt/liferay \
@@ -61,13 +64,6 @@ RUN groupadd 1000 \
 USER 1000
 
 ENV CATALINA_OPTS -Dhttp.proxyHost=${proxyHost} -Dhttp.proxyPort=${proxyPort} -Dhttps.proxyHost=${proxyHost} -Dhttps.proxyPort=${proxyPort}
-
-#ADD license-portaldevelopment-developer-6.2ee-axa.xml /opt/liferay/deploy/
-RUN cd /opt/liferay/deploy/ \
-&& curl --digest -x ${http_proxy} --user ${REPO_USER}:${REPO_PASS} -LO http://filerepo.osappext.pink.eu-central-1.aws.openpaas.axa-cloud.com/liferay-docker/license-portaldevelopment-developer-6.2ee-axa.xml \
-&& chown -R 1000:1000 /opt/liferay/deploy \
-&& chmod -R 777 /opt/liferay/deploy
-
 RUN /opt/confd -onetime -backend env
 
 EXPOSE 8080 8009
