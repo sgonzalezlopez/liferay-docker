@@ -54,7 +54,7 @@ RUN ln -s /opt/liferay-portal-6.2-ee-sp14 /opt/liferay
 ENV LIFERAY_HOME /opt/liferay 
 RUN mkdir /opt/liferay/deploy/ \
 && cd /opt/liferay/deploy/ \
-&& curl --digest -x ${http_proxy} --user ${REPO_USER}:${REPO_PASS} -LO http://filerepo.osappext.pink.eu-central-1.aws.openpaas.axa-cloud.com/liferay-docker/license-portaldevelopment-developer-6.2ee-axa.xml \
+&& curl --digest -x ${http_proxy} --user ${REPO_USER}:${REPO_PASS} -LO http://filerepo.osappext.pink.eu-central-1.aws.openpaas.axa-cloud.com/liferay-docker/license-portaldevelopment-developer-6.2ee-axa.xml
 
 RUN groupadd 1000 \
     && useradd -g 1000 -d $LIFERAY_HOME -s /bin/bash -c "Docker image user" 1000 \
