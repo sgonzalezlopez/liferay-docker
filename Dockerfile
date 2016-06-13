@@ -10,8 +10,8 @@ RUN echo $REPO_PASS
 
 ENV PROXY_PORT 3128
 
-ARG REPO_USER
-ARG REPO_PASS
+ENV REPO_USER user
+ENV REPO_PASS pass
 
 ENV http_proxy http://${PROXY_HOST}:${PROXY_PORT}
 ENV https_proxy http://${PROXY_HOST}:${PROXY_PORT}
