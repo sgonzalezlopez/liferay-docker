@@ -13,6 +13,7 @@ MAINTAINER AXA MedLA
 ENV http_proxy http://${proxyHost}:${proxyPort}
 ENV https_proxy http://${proxyHost}:${proxyHost}
 ENV LIFERAY_HOME /opt/liferay 
+ENV CATALINA_OPTS -Dhttp.proxyHost=${proxyHost} -Dhttp.proxyPort=${proxyPort} -Dhttps.proxyHost=${proxyHost} -Dhttps.proxyPort=${proxyPort}
 
 RUN cd /opt \
 && curl -LO -x ${http_proxy} https://github.com/kelseyhightower/confd/releases/download/v0.11.0/confd-0.11.0-linux-amd64 \
@@ -53,7 +54,6 @@ RUN groupadd 1000 \
 
 USER 1000
 
-ENV CATALINA_OPTS -Dhttp.proxyHost=${proxyHost} -Dhttp.proxyPort=${proxyPort} -Dhttps.proxyHost=${proxyHost} -Dhttps.proxyPort=${proxyPort}
 RUN /opt/confd -onetime -backend env
 
 EXPOSE 8080 8009
