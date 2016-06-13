@@ -64,7 +64,8 @@ ENV CATALINA_OPTS -Dhttp.proxyHost=${proxyHost} -Dhttp.proxyPort=${proxyPort} -D
 
 #ADD license-portaldevelopment-developer-6.2ee-axa.xml /opt/liferay/deploy/
 RUN cd /opt/liferay/deploy/ \
-&& curl --digest -x ${http_proxy} --user ${REPO_USER}:${REPO_PASS} -LO http://filerepo.osappext.pink.eu-central-1.aws.openpaas.axa-cloud.com/liferay-docker/license-portaldevelopment-developer-6.2ee-axa.xml
+&& curl --digest -x ${http_proxy} --user ${REPO_USER}:${REPO_PASS} -LO http://filerepo.osappext.pink.eu-central-1.aws.openpaas.axa-cloud.com/liferay-docker/license-portaldevelopment-developer-6.2ee-axa.xml \
+&& chmod -R 777 *
 
 RUN /opt/confd -onetime -backend env
 
