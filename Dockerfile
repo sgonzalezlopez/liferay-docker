@@ -48,9 +48,15 @@ RUN cd /tmp \
 
 RUN unzip /tmp/liferay-portal-tomcat-6.2-ee-sp14-20151105114451508.zip -d /opt \
 && rm -f /tmp/liferay-portal-tomcat-6.2-ee-sp14-20151105114451508.zip
+
 RUN ln -s /opt/liferay-portal-6.2-ee-sp14 /opt/liferay
 
 ENV LIFERAY_HOME /opt/liferay
+
+RUN groupadd 1000 \
+    && useradd -g 1000 -d $LIFERAY_HOME -s /bin/bash -c "Docker image user" 1000 \
+    && chown -R 1000:1000 /opt/liferay \
+    && chmod -R 777 /opt/liferay
 
 ENV CATALINA_OPTS -Dhttp.proxyHost=${proxyHost} -Dhttp.proxyPort=${proxyPort} -Dhttps.proxyHost=${proxyHost} -Dhttps.proxyPort=${proxyPort}
 RUN mkdir /opt/liferay/deploy/
@@ -62,5 +68,8 @@ RUN cd /opt/liferay/deploy/ \
 RUN /opt/confd -onetime -backend env
 
 EXPOSE 8080 8009
+
+USER 1000
+WORKDIR $LIFERAY_HOME
 
 ENTRYPOINT ["/opt/liferay/tomcat-7.0.62/bin/catalina.sh", "run"]
