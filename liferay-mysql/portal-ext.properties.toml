@@ -1,0 +1,11 @@
+[template]
+src = "portal-ext.properties.tmpl"
+dest = "/opt/liferay/tomcat-7.0.62/webapps/ROOT/WEB-INF/classes/portal-ext.properties"
+keys = [
+	"LIFERAY_MYSQL_SERVICE_HOST",
+	"MYSQL_PASS",
+	"MYSQL_USER",
+	"MYSQL_DB"
+]
+owner = "root"
+mode = "0644"
