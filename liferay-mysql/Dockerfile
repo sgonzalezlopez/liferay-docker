@@ -2,7 +2,7 @@ FROM liferay-test:latest
 
 MAINTAINER AXA MedLA
 
-ADD portal-ext.properties /etc/confd/conf.d /opt/liferay/tomcat-7.0.62/webapps/ROOT/WEB-INF/classes/
+ADD portal-ext.properties /opt/liferay/tomcat-7.0.62/webapps/ROOT/WEB-INF/classes/
 
 #RUN cd /tmp \
 #&& curl --digest -x ${http_proxy} --user ${REPO_USER}:${REPO_PASS} -LO http://filerepo.osappext.pink.eu-central-1.aws.openpaas.axa-cloud.com/liferay-docker/portal-ext.properties
