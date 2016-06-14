@@ -3,8 +3,8 @@ FROM liferay-test:latest
 MAINTAINER AXA MedLA
 
 #ADD portal-ext.properties /opt/liferay/tomcat-7.0.62/webapps/ROOT/WEB-INF/classes/
-ADD portal-ext.properties.tmpl /etc/confd/templates
-ADD portal-ext.properties.toml /etc/confd/conf.d
+ADD portal-ext.properties.tmpl /etc/confd/templates/
+ADD portal-ext.properties.toml /etc/confd/conf.d/
 RUN /opt/confd -onetime -backend env
 
 #RUN cd /tmp \
