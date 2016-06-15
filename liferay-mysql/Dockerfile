@@ -12,7 +12,7 @@ ADD portal-ext.properties.toml /etc/confd/conf.d/
 #RUN /opt/confd -onetime -backend env \
 #&& cat /opt/liferay/tomcat-7.0.62/webapps/ROOT/WEB-INF/classes/portal-ext.properties
 
-USER 1000
+USER 1
 ADD bin.sh /opt/liferay/
 RUN chmod 777 /opt/liferay/bin.sh
 
