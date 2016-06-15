@@ -13,12 +13,12 @@ ADD portal-ext.properties.toml /etc/confd/conf.d/
 #&& cat /opt/liferay/tomcat-7.0.62/webapps/ROOT/WEB-INF/classes/portal-ext.properties
 
 USER 1000
-ADD bin.sh /tmp/
-RUN chmod 777 /tmp/bin.sh
+ADD bin.sh /opt/liferay/
+RUN chmod 777 /opt/liferay/bin.sh
 
 #RUN cd /tmp \
 #&& curl --digest -x ${http_proxy} --user ${REPO_USER}:${REPO_PASS} -LO http://filerepo.osappext.pink.eu-central-1.aws.openpaas.axa-cloud.com/liferay-docker/portal-ext.properties
 #&& mv /tmp/portal-ext.properties /opt/liferay/tomcat-7.0.62/webapps/ROOT/WEB-INF/classes/portal-ext.properties \
 #&& rm /tmp/portal-ext.properties
 
-ENTRYPOINT ["/tmp/bin.sh"]
+ENTRYPOINT ["/opt/liferay/bin.sh"]
