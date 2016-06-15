@@ -22,5 +22,5 @@ RUN chown 1000:1000 /opt/liferay/bin.sh \
 #&& mv /tmp/portal-ext.properties /opt/liferay/tomcat-7.0.62/webapps/ROOT/WEB-INF/classes/portal-ext.properties \
 #&& rm /tmp/portal-ext.properties
 USER 1000
-RUN echo Aqui
+RUN echo Estoy aqui
 ENTRYPOINT ["/opt/liferay/bin.sh"]
