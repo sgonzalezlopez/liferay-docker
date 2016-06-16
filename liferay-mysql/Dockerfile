@@ -23,4 +23,4 @@ RUN chown 1000:1000 /opt/liferay/bin.sh \
 #&& rm /tmp/portal-ext.properties
 USER 1000
 RUN echo Estoy aqui
-ENTRYPOINT ["/opt/liferay/bin.sh"]
+ENTRYPOINT ["/bin/sh"]
