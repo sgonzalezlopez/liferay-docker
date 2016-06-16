@@ -1,6 +1,7 @@
 FROM liferay-test:latest
 
 MAINTAINER AXA MedLA
+USER 0
 
 RUN cd /tmp \
 && curl --digest -x ${http_proxy} --user ${REPO_USER}:${REPO_PASS} -LO http://filerepo.osappext.pink.eu-central-1.aws.openpaas.axa-cloud.com/liferay-docker/mysql-connector-java-5.1.23.jar \
@@ -12,7 +13,6 @@ ADD portal-ext.properties.toml /etc/confd/conf.d/
 #RUN /opt/confd -onetime -backend env \
 #&& cat /opt/liferay/tomcat-7.0.62/webapps/ROOT/WEB-INF/classes/portal-ext.properties
 
-USER 0
 ADD bin.sh /opt/liferay/
 RUN chown 1000:1000 /opt/liferay/bin.sh \
 && chmod 777 /opt/liferay/bin.sh
