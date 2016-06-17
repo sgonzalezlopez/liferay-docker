@@ -23,4 +23,4 @@ RUN chown 1000:1000 /opt/liferay/ejecuta.sh \
 #&& rm /tmp/portal-ext.properties
 USER 1000
 
-#ENTRYPOINT ["/opt/liferay/ejecuta.sh"]
+ENTRYPOINT ["/opt/liferay/ejecuta.sh"]
