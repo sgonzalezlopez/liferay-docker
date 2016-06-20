@@ -2,6 +2,8 @@
 src = "portal-ext.properties.tmpl"
 dest = "/opt/liferay/tomcat-7.0.62/webapps/ROOT/WEB-INF/classes/portal-ext.properties"
 keys = [
+	"LIFERAY_ELASTICSEARCH_SERVICE_HOST",
+	"LIFERAY_ELASTICSEARCH_SERVICE_PORT",
 	"LIFERAY_MYSQL_SERVICE_HOST",
 	"MYSQL_PASS",
 	"MYSQL_USER",
