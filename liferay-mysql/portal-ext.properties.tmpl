@@ -1,7 +1,15 @@
-    #
-    # MySQL
-    #
+#
+# MySQL
+#
     jdbc.default.driverClassName=com.mysql.jdbc.Driver
     jdbc.default.url=jdbc:mysql://{{getenv "LIFERAY_MYSQL_SERVICE_HOST"}}/{{getenv "MYSQL_DB"}}?useUnicode=true&characterEncoding=UTF-8&useFastDateParsing=false
     jdbc.default.username={{getenv "MYSQL_USER"}}
     jdbc.default.password={{getenv "MYSQL_PASS"}}
+    
+    
+# Elasticray Plugin for Elasticsearch Integration
+    elasticsearch.serverIP={{getenv "LIFERAY_ELASTICSEARCH_SERVICE_HOST"}}
+    elasticsearch.portNumber={{getenv "LIFERAY_ELASTICSEARCH_SERVICE_PORT"}}
+    elasticsearch.cluster.name=elasticsearch
+    elasticsearch.index.name=liferay_es
+
