@@ -14,7 +14,8 @@ ENV NEXUS_REPOSITORY nexus.axamedla-liferay.osappext.pink.eu-central-1.aws.openp
 
 ENV http_proxy http://${proxyHost}:${proxyPort}
 ENV https_proxy http://${proxyHost}:${proxyHost}
-ENV LIFERAY_HOME /opt/liferay 
+ENV LIFERAY_HOME /opt/liferay
+ENV TOMCAT_PATH /opt/liferay/tomcat-7.0.42
 ENV CATALINA_OPTS -Dhttp.proxyHost=${proxyHost} -Dhttp.proxyPort=${proxyPort} -Dhttps.proxyHost=${proxyHost} -Dhttps.proxyPort=${proxyPort}
 
 RUN cd /opt \
@@ -42,7 +43,8 @@ RUN cd /opt \
     && curl -LO http://${NEXUS_REPOSITORY}/liferay/bundle/6.2-ee-axa/bundle-6.2-ee-axa.tar.gz \
     && tar xzvf bundle-6.2-ee-axa.tar.gz \
     && rm -f bundle-6.2-ee-axa.tar.gz \
-    && ln -s /opt/liferay-portal-6.2-ee-axa /opt/liferay
+    && ln -s /opt/liferay-portal-6.2-ee-axa /opt/liferay \
+    && ln -s ${TOMCAT_PATH} /opt/liferay/tomcat
 
 #ADD liferay-portal-tomcat-6.2-ee-sp14-20151105114451508.zip /tmp
 #RUN cd /tmp \
@@ -68,4 +70,4 @@ EXPOSE 8080 8009
 
 WORKDIR $LIFERAY_HOME
 
-ENTRYPOINT ["/opt/liferay/tomcat-7.0.42/bin/catalina.sh", "run"]
+ENTRYPOINT ["/opt/liferay/tomcat/bin/catalina.sh", "run"]
