@@ -10,6 +10,8 @@ MAINTAINER AXA MedLA
 #ENV REPO_USER user
 #ENV REPO_PASS pass
 
+ENV NEXUS_REPOSITORY nexus.axamedla-liferay.osappext.pink.eu-central-1.aws.openpaas.axa-cloud.com/service/local/repositories/releases/content
+
 ENV http_proxy http://${proxyHost}:${proxyPort}
 ENV https_proxy http://${proxyHost}:${proxyHost}
 ENV LIFERAY_HOME /opt/liferay 
@@ -36,16 +38,22 @@ RUN cd /tmp \
 && rpm -i /tmp/jdk-7u79-linux-x64.rpm \
 && rm -f /tmp/jdk-7u79-linux-x64.rpm
 
-#ADD liferay-portal-tomcat-6.2-ee-sp14-20151105114451508.zip /tmp
-RUN cd /tmp \
-&& curl --digest -x ${http_proxy} --user ${REPO_USER}:${REPO_PASS} -LO http://filerepo.osappext.pink.eu-central-1.aws.openpaas.axa-cloud.com/liferay-docker/liferay-portal-tomcat-6.2-ee-sp14-20151105114451508.zip \
-&& unzip /tmp/liferay-portal-tomcat-6.2-ee-sp14-20151105114451508.zip -d /opt \
-&& rm -f /tmp/liferay-portal-tomcat-6.2-ee-sp14-20151105114451508.zip \
-&& ln -s /opt/liferay-portal-6.2-ee-sp14 /opt/liferay
+RUN cd /opt \
+    && curl -LO http://${NEXUS_REPOSITORY}/liferay/bundle/6.2-ee-axa/bundle-6.2-ee-axa.tar.gz \
+    && tar xzvf bundle-6.2-ee-axa.tar.gz \
+    && rm -f bundle-6.2-ee-axa.tar.gz
+    && ln -s /opt/liferay-portal-6.2-ee-axa /opt/liferay
 
-RUN mkdir /opt/liferay/deploy/ \
-&& cd /opt/liferay/deploy/ \
-&& curl --digest -x ${http_proxy} --user ${REPO_USER}:${REPO_PASS} -LO http://filerepo.osappext.pink.eu-central-1.aws.openpaas.axa-cloud.com/liferay-docker/license-portaldevelopment-developer-6.2ee-axa.xml
+#ADD liferay-portal-tomcat-6.2-ee-sp14-20151105114451508.zip /tmp
+#RUN cd /tmp \
+#&& curl --digest -x ${http_proxy} --user ${REPO_USER}:${REPO_PASS} -LO http://filerepo.osappext.pink.eu-central-1.aws.openpaas.axa-cloud.com/liferay-docker/liferay-portal-tomcat-6.2-ee-sp14-20151105114451508.zip \
+#&& unzip /tmp/liferay-portal-tomcat-6.2-ee-sp14-20151105114451508.zip -d /opt \
+#&& rm -f /tmp/liferay-portal-tomcat-6.2-ee-sp14-20151105114451508.zip \
+#&& ln -s /opt/liferay-portal-6.2-ee-sp14 /opt/liferay
+
+RUN mkdir /opt/liferay/deploy/
+#&& cd /opt/liferay/deploy/ \
+#&& curl --digest -x ${http_proxy} --user ${REPO_USER}:${REPO_PASS} -LO http://filerepo.osappext.pink.eu-central-1.aws.openpaas.axa-cloud.com/liferay-docker/license-portaldevelopment-developer-6.2ee-axa.xml
 
 RUN groupadd 1000 \
     && useradd -g 1000 -d $LIFERAY_HOME -s /bin/bash -c "Docker image user" 1000 \
