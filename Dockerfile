@@ -41,7 +41,7 @@ RUN cd /tmp \
 RUN cd /opt \
     && curl -LO http://${NEXUS_REPOSITORY}/liferay/bundle/6.2-ee-axa/bundle-6.2-ee-axa.tar.gz \
     && tar xzvf bundle-6.2-ee-axa.tar.gz \
-    && rm -f bundle-6.2-ee-axa.tar.gz
+    && rm -f bundle-6.2-ee-axa.tar.gz \
     && ln -s /opt/liferay-portal-6.2-ee-axa /opt/liferay
 
 #ADD liferay-portal-tomcat-6.2-ee-sp14-20151105114451508.zip /tmp
