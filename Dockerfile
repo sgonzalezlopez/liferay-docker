@@ -22,12 +22,10 @@ RUN cd /opt \
 && curl -LO -x ${http_proxy} https://github.com/kelseyhightower/confd/releases/download/v0.11.0/confd-0.11.0-linux-amd64 \
 && chmod 777 /opt/confd-0.11.0-linux-amd64 \
 && mv confd-0.11.0-linux-amd64 confd \
-&& mkdir -p /etc/confd/{conf.d,templates} \
-&& curl --digest -x ${http_proxy} --user ${REPO_USER}:${REPO_PASS} -LO http://filerepo.osappext.pink.eu-central-1.aws.openpaas.axa-cloud.com/liferay-docker/portal-bundle.properties.tmpl \
-&& mv portal-bundle.properties.tmpl /etc/confd/templates/ \
-&& curl --digest -x ${http_proxy} --user ${REPO_USER}:${REPO_PASS} -LO http://filerepo.osappext.pink.eu-central-1.aws.openpaas.axa-cloud.com/liferay-docker/portal-bundle.properties.toml \
-&& mv portal-bundle.properties.toml /etc/confd/conf.d/
+&& mkdir -p /etc/confd/{conf.d,templates}
 
+ADD portal-bundle.properties.tmpl /etc/confd/templates/
+ADD portal-bundle.properties.toml /etc/confd/conf.d/
 
 RUN yum -y update \
 && yum install -y unzip \ 
