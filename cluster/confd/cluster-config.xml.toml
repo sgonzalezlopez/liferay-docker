@@ -1,0 +1,12 @@
+[template]
+src = "cluster-config.xml.tmpl"
+dest = "/opt/liferay/cluster-config/cluster-config.xml"
+keys = [
+	"LIFERAY_MYSQL_SERVICE_HOST",
+	"LIFERAY_MYSQL_SERVICE_PORT",
+	"MYSQL_PASS",
+	"MYSQL_USER",
+	"MYSQL_DB"
+]
+owner = "root"
+mode = "0644"
