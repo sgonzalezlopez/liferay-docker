@@ -68,4 +68,4 @@ EXPOSE 8080 8009
 
 WORKDIR $LIFERAY_HOME
 
-ENTRYPOINT ["/opt/liferay/tomcat/bin/catalina.sh", "run"]
+ENTRYPOINT ["/opt/liferay/ejecuta.sh"]
