@@ -56,6 +56,8 @@ RUN mkdir /opt/liferay/deploy/
 #&& curl --digest -x ${http_proxy} --user ${REPO_USER}:${REPO_PASS} -LO http://filerepo.osappext.pink.eu-central-1.aws.openpaas.axa-cloud.com/liferay-docker/license-portaldevelopment-developer-6.2ee-axa.xml
 
 ADD ejecuta.sh /opt/liferay/
+RUN chown 1000:1000 /opt/liferay/ejecuta.sh \
+&& chmod +x /opt/liferay/ejecuta.sh
 
 RUN groupadd 1000 \
     && useradd -g 1000 -d $LIFERAY_HOME -s /bin/bash -c "Docker image user" 1000 \
