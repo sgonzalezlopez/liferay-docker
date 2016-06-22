@@ -10,8 +10,8 @@ RUN cd /tmp \
 && mv /tmp/Elasticray.lpkg /opt/liferay/deploy/Elasticray.lpkg \
 && chmod 777 /opt/liferay/deploy/*
 
-ADD *.tmpl /etc/confd/templates/
-ADD *.toml /etc/confd/conf.d/
+ADD /confd/*.tmpl /etc/confd/templates/
+ADD /confd/*.toml /etc/confd/conf.d/
 
 ADD ejecuta.sh /opt/liferay/
 RUN chown 1000:1000 /opt/liferay/ejecuta.sh \
