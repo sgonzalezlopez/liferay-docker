@@ -13,9 +13,5 @@ RUN cd /tmp \
 ADD /confd/*.tmpl /etc/confd/templates/
 ADD /confd/*.toml /etc/confd/conf.d/
 
-ADD ejecuta.sh /opt/liferay/
-RUN chown 1000:1000 /opt/liferay/ejecuta.sh \
-&& chmod +x /opt/liferay/ejecuta.sh
-
 RUN cd /opt/liferay/deploy/ \
 && curl --digest -x ${http_proxy} --user ${REPO_USER}:${REPO_PASS} -LO http://filerepo.osappext.pink.eu-central-1.aws.openpaas.axa-cloud.com/liferay-docker/license-portaldevelopment-developer-6.2ee-axa.xml
