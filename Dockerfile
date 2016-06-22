@@ -62,8 +62,6 @@ RUN groupadd 1000 \
 
 USER 1000
 
-RUN /opt/confd -onetime -backend env
-
 EXPOSE 8080 8009
 
 WORKDIR $LIFERAY_HOME
