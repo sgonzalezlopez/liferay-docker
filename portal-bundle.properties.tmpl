@@ -1,0 +1,33 @@
+#
+# Specify the Liferay home directory.
+#
+liferay.home=/opt/liferay
+
+#
+# Disable the Setup Wizard that is displayed the first the portal is started.
+#
+setup.wizard.enabled=false
+
+#
+# Do not automatically launch a browser when the portal has fully initialized.
+#
+browser.launcher.url=
+
+#
+# Set the properties used to create the JDBC data source.
+#
+jdbc.default.driverClassName={{or (getenv "DB_DRIVER") "org.hsqldb.jdbcDriver"}}
+jdbc.default.url={{or (getenv "DB_URL") "jdbc:hsqldb:/opt/liferay/data/hsql/lportal;DB_CLOSE_ON_EXIT=FALSE"}}
+jdbc.default.username={{or (getenv "DB_USERNAME") "sa"}}
+jdbc.default.password={{or (getenv "DB_PASSWORD") ""}}
+
+#####
+# TODO : allow additional databases from conf.d
+#####
+
+#
+# Configure document library to use advanced file system store.
+#
+dl.store.impl=com.liferay.portlet.documentlibrary.store.AdvancedFileSystemStore
+dl.store.file.system.root.dir={{or (getenv "DL_DIR") "/opt/liferay/data/document_library"}}
+dl.store.advanced.file.system.root.dir={{or (getenv "DL_DIR") "/opt/liferay/data/document_library"}}
